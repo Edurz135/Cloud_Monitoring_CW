@@ -1,4 +1,4 @@
-# Resumen de Video: Instalación y Configuración de CloudWatch Agent en EC2
+# Instalación y Configuración de CloudWatch Agent en EC2
 
 ## Introducción
 
@@ -14,6 +14,8 @@ Este video cubre cómo instalar y configurar el agente de CloudWatch en una inst
    - **AmazonEC2RoleforSSM**
    - **CloudWatchAgentServerPolicy**
 4. Asigna un nombre al rol (ej., `CloudWatchAgentRole`) y créalo.
+
+![alt text](image-1.png)
 
 ### 2. Crear e Iniciar una Instancia EC2
 
@@ -59,6 +61,34 @@ Ve al directorio de instalación y utiliza el comando para iniciar el agente:
 sudo ./amazon-cloudwatch-agent-ctl -a start
 ```
 
+### 6. Pruebas de Estrés
+
+Para realizar pruebas de estrés y monitorear el rendimiento del EC2 desde Amazon CloudWatch, se utilizará la siguiente librería.
+
+```bash
+sudo yum install stress -y
+```
+
+Se realizó varias pruebas de estrés como:
+
+1. Prueba de CPU:
+
+```
+stress --cpu 4 --timeout 60
+```
+
+2. Prueba de memoria:
+
+```
+stress --vm 2 --vm-bytes 256M --timeout 60
+```
+
+1. Prueba de I/O en disco:
+
+```
+stress --io 4 --timeout 60
+```
+
 ## Verificación y Monitoreo
 
 ### Métricas de CloudWatch
@@ -73,6 +103,7 @@ sudo ./amazon-cloudwatch-agent-ctl -a start
 3. Explora los logs del sistema en el log stream correspondiente.
 
 ### Dashboards
+
 En base a las métricas se pueden generar dashboards para facilitar el entendimiento del rendimiento del EC2.
 
 ![alt text](image.png)
